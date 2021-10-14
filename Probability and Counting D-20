@@ -1,0 +1,781 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Untitled0.ipynb",
+      "provenance": [],
+      "authorship_tag": "ABX9TyNirkAyXQ889FAO2b8UeUwa",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/JDestroyer5/Discrete_Mathmatics/blob/main/Probability%20and%20Counting%20D-20\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "gXgOnEZaJ6hP"
+      },
+      "source": [
+        "# Project Part # : CPSMA 3913 Dr. Jacob's Discrete Mathematics\n",
+        "\n",
+        "# Probability and Counting\n",
+        "\n",
+        "# Joshua Myers: 252405"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "S4TLe_rcKs8u"
+      },
+      "source": [
+        "# **Probability**"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "jjhrlfst-A9m"
+      },
+      "source": [
+        "## **Dice Probablility**"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "oMkieFCrUISr"
+      },
+      "source": [
+        "You roll a D-20 (dice with 20 sides). If you roll a 10 or 20 you get a point and you roll again (1/10), P. If you roll an 11 to 19 you roll again but do not gain a point (9/20), NP.\n",
+        "If you roll less than 10 your turn is over (9/20), O."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "BQ_LWSsoHp59",
+        "outputId": "3f5ff0cd-f2cc-49c7-b658-2a66f5d52dd7"
+      },
+      "source": [
+        "p =[1/10,9/20,9/20]\n",
+        "sum(p) #everything is positive and sum is 1"
+      ],
+      "execution_count": 91,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "1.0"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 91
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "h8GOUXh-jozo"
+      },
+      "source": [
+        "ProbabilityP = p[0]\n",
+        "ProbabilityNP = p[1]\n",
+        "ProbabilityO = p[2]"
+      ],
+      "execution_count": 92,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "7Abz2h5OWsdB"
+      },
+      "source": [
+        "Compound Event for Rerolling"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "RUvXE4fyXNNo",
+        "outputId": "75833847-34b8-4463-8ff1-b1f930fba125"
+      },
+      "source": [
+        "ProbabilityR = 0\n",
+        "\n",
+        "for i in [0,1]:\n",
+        "  ProbabilityR = ProbabilityR + p[i]\n",
+        "\n",
+        "ProbabilityR"
+      ],
+      "execution_count": 93,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "0.55"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 93
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "ccceOPiyoDyt"
+      },
+      "source": [
+        "## **Union and Intersection**"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "1YD0tQyDkS7U"
+      },
+      "source": [
+        "Intersection: \n",
+        "$$\n",
+        "R\\cap P = P\\cap R\n",
+        "$$\n",
+        "Union: \n",
+        "$$\n",
+        "R\\cup P = P\\cup R\n",
+        "$$\n",
+        "Formula: \n",
+        "$$\n",
+        "Pr(R\\cup P) = Pr(R) + Pr(P) - Pr(R\\cap P)\n",
+        "$$"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "1Dw8F7ckkiyi",
+        "outputId": "c4bdc93a-e0ae-4e5f-9e0a-dacdbcc65e6a"
+      },
+      "source": [
+        "RintersectP = p[0] #you have to get a point for both to occur\n",
+        "\n",
+        "RunionP = ProbabilityR + ProbabilityP - RintersectP\n",
+        "RunionP"
+      ],
+      "execution_count": 94,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "0.55"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 94
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "l10HVRNWzxoY"
+      },
+      "source": [
+        "PintersectR = RintersectP\n",
+        "PunionR = RunionP"
+      ],
+      "execution_count": 95,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "ldsUFqrPxFvW"
+      },
+      "source": [
+        "What is the probability of getting a point given you roll again\n",
+        "$$\n",
+        "Pr(P|R) = \\frac{Pr(P\\cap R)}{Pr(R)}\n",
+        "$$"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "8NgwS0OTyS-7",
+        "outputId": "7b963983-e830-4a55-b6ea-2db1fcede638"
+      },
+      "source": [
+        "\n",
+        "PintersectR/ProbabilityR"
+      ],
+      "execution_count": 96,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "0.18181818181818182"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 96
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "1YyTNXGFzCT5"
+      },
+      "source": [
+        "What is the probability of rolling again given that you got a point \n",
+        "$$\n",
+        "Pr(R|P) = \\frac{Pr(R\\cap P)}{Pr(P)}\n",
+        "$$\n",
+        "It will be 100 percent because you have to roll again when you get a point"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "mdsmdreYy_Tg",
+        "outputId": "9d3dd0b8-82ab-4e76-d193-a8c638a10229"
+      },
+      "source": [
+        "RintersectP/ProbabilityP"
+      ],
+      "execution_count": 97,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "1.0"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 97
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "wzxWyUm_02Vv"
+      },
+      "source": [
+        "Applying Bayes'\n",
+        "\n",
+        "Formula\n",
+        "$$\n",
+        "Pr(P|R) = \\frac{Pr(P)Pr(R|P)}{Pr(R)}\n",
+        "$$"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "gEJWj-ll1UeO",
+        "outputId": "236a4d18-2805-47d4-9851-5387f8b56419"
+      },
+      "source": [
+        ".18181818181818182 == (ProbabilityP * 1)/ ProbabilityR"
+      ],
+      "execution_count": 98,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "True"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 98
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "2IBB_jNu2mVl"
+      },
+      "source": [
+        "Probability of the compliment of R"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Cu7wyu9z22N7",
+        "outputId": "0deb1b81-4347-46f6-f26e-aef063bb742c"
+      },
+      "source": [
+        "ProbabilityNotR = 1 - ProbabilityR\n",
+        "ProbabilityNotR"
+      ],
+      "execution_count": 99,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "0.44999999999999996"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 99
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "G3wI1Rj43-r3"
+      },
+      "source": [
+        "## **Simulation**"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "S_N8Vute4DRg"
+      },
+      "source": [
+        "I need frequency counts not probabilities so I'll multiply every probability by 20"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "19-pI8J04RIH",
+        "outputId": "436893d7-ff46-4a52-c7be-7d1fad050682"
+      },
+      "source": [
+        "p10 = [10*i for i in p]\n",
+        "p10"
+      ],
+      "execution_count": 100,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "[1.0, 4.5, 4.5]"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 100
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "x4RDZPIz4jSn",
+        "outputId": "af2a2b4c-4281-4bd5-db4c-75d5ed8dd7e5"
+      },
+      "source": [
+        "from random import choices\n",
+        "\n",
+        "choices(['Point','NoPoint','TurnOver'],p10,k=20)"
+      ],
+      "execution_count": 111,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "['TurnOver',\n",
+              " 'TurnOver',\n",
+              " 'TurnOver',\n",
+              " 'NoPoint',\n",
+              " 'TurnOver',\n",
+              " 'TurnOver',\n",
+              " 'TurnOver',\n",
+              " 'TurnOver',\n",
+              " 'NoPoint',\n",
+              " 'TurnOver',\n",
+              " 'NoPoint',\n",
+              " 'TurnOver',\n",
+              " 'TurnOver',\n",
+              " 'Point',\n",
+              " 'NoPoint',\n",
+              " 'TurnOver',\n",
+              " 'TurnOver',\n",
+              " 'Point',\n",
+              " 'TurnOver',\n",
+              " 'TurnOver']"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 111
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "MbFoPP_Y5izf"
+      },
+      "source": [
+        "HundoRolls =  choices(['Point','NoPoint','TurnOver'],p10,k=10000)\n",
+        "\n",
+        "countPoint = 0\n",
+        "countNoPoint = 0\n",
+        "countTurnOver = 0\n",
+        "\n",
+        "for i in HundoRolls:\n",
+        "  if i =='Point':\n",
+        "    countPoint += 1\n",
+        "  elif i == 'NoPoint':\n",
+        "    countNoPoint += 1\n",
+        "  elif i == 'TurnOver':\n",
+        "    countTurnOver += 1\n",
+        "\n",
+        "estimateProbs = [countPoint/len(HundoRolls),countNoPoint/len(HundoRolls),countTurnOver/len(HundoRolls)]"
+      ],
+      "execution_count": 112,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "WN_WglWx6Lkb",
+        "outputId": "5e5cef93-15f6-4738-9bf0-7ca84cd33512"
+      },
+      "source": [
+        "estimateProbs"
+      ],
+      "execution_count": 113,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "[0.1004, 0.4508, 0.4488]"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 113
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "aU66kdDJ6lGG"
+      },
+      "source": [
+        "The simulation gives roughly the same percents as the Probabilities"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "CRZaCCX67K0X"
+      },
+      "source": [
+        "# **Counting**"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "q3GkXkFDBfNe"
+      },
+      "source": [
+        "## **Order**"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "iMYw-7mo9Tnv"
+      },
+      "source": [
+        "There are three option in my sequence of 20 so there are 3**20 options"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "sjhKliXP9TA4",
+        "outputId": "c42a6f58-e40c-41bb-862d-61f565a3e847"
+      },
+      "source": [
+        "3**20"
+      ],
+      "execution_count": 115,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "3486784401"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 115
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "ZtppwahK-rEy"
+      },
+      "source": [
+        "Thats if order mattered but if order didn't matter then it more complicated. You can figure it out using this formula, where k is number of catigories (3) and n is number of objects (20)\n",
+        "$$\n",
+        "\\binom{n+k-1}{k-1} = \\binom{n+k-1}{n}\n",
+        "$$"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "CiLzsHVA_6K3",
+        "outputId": "638b72c3-9602-417e-9594-314213bed3ba"
+      },
+      "source": [
+        "import math\n",
+        "\n",
+        "math.factorial(22)/(math.factorial(20)*math.factorial(2))"
+      ],
+      "execution_count": 116,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "231.0"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 116
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "R4eo-gf6BiHP"
+      },
+      "source": [
+        "## **Replacement**"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "zFdDrKADBWp6"
+      },
+      "source": [
+        "I cannot do 20 without replacement, i can only do three because there are only three options to choose.\n",
+        "\n",
+        "If order matters it is $3!$ \n",
+        "\n",
+        "If not $\\binom33$"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "bUggCDrKCccs",
+        "outputId": "1a60eca2-4408-4389-c0d5-0427b33d862a"
+      },
+      "source": [
+        "math.factorial(3)"
+      ],
+      "execution_count": 117,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "6"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 117
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "aJew7651ChSW",
+        "outputId": "7c9ac493-de01-4e17-d7c6-85b5ab0abe34"
+      },
+      "source": [
+        "math.factorial(3)/(math.factorial(0)*math.factorial(3))"
+      ],
+      "execution_count": 118,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "1.0"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 118
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "vtxgvT9QEbKf"
+      },
+      "source": [
+        "## **Binomial Theorem**"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "dRCP_9DvEg66"
+      },
+      "source": [
+        "Solve for $(x+2)^9$ when $n=5$\n",
+        "\n",
+        "Binomial Theorem\n",
+        "$$\n",
+        "\\left(x+y\\right)^9 = \\sum_{n = 0}^9\\binom 9 n x^ny^{9-n}\n",
+        "$$\n",
+        "So I have\n",
+        "$$\n",
+        "\\left(x+2\\right)^9 = \\sum_{n = 0}^9\\binom 9 n x^n2^{9-n}\n",
+        "$$"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "LnKA50gKFIuU",
+        "outputId": "76f735e5-eeb6-416a-c48f-724a7982c4c9"
+      },
+      "source": [
+        "n = 5\n",
+        "\n",
+        "(math.factorial(9)/(math.factorial(9-n)*math.factorial(n)))*2**n"
+      ],
+      "execution_count": 148,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "4032.0"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 148
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "S4GExFtnM-Bh"
+      },
+      "source": [
+        "The answer is $4032x^4$"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "TOqPJoGKNqGe"
+      },
+      "source": [
+        "# **Comments**"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "mTFu6bNxNshX"
+      },
+      "source": [
+        "a) I found that using certain probabilities worked better than others the first one that I tried to use I could not get it to work, so I switched to the dice one I used.\n",
+        "\n",
+        "b)I could not get the binomial theorem to compute with the x so I wrote it out afterwards.\n",
+        "\n",
+        "c)The simulation is just that a simulation it will not always work out how it should."
+      ]
+    }
+  ]
+}
